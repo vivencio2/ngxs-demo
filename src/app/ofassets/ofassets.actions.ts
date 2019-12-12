@@ -19,3 +19,8 @@ export class DeleteAssetAction {
   public static readonly type = '[Asset] Delete Asset';
   constructor(public payload: Asset) {}
 }
+
+export class SelectAssetAction {
+  public static readonly type = '[Asset] Select Asset';
+  constructor(public payload: Asset) {}
+}

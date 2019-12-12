@@ -5,7 +5,7 @@ import { Select, Store } from '@ngxs/store';
 import { AssetState } from '../ofassets.state';
 import { Asset } from 'src/app/asset';
 import { Observable } from 'rxjs';
-import { GetAssetsAction } from '../ofassets.actions';
+import { GetAssetsAction, SelectAssetAction } from '../ofassets.actions';
 
 @Component({
   selector: 'read-assets',
@@ -15,8 +15,9 @@ import { GetAssetsAction } from '../ofassets.actions';
 export class ReadAssetsComponent implements OnInit {
   current_asset_name: string;
   current_asset: any;
-  @Output() selected_current_asset = new EventEmitter<any>();
+  // @Output() selected_current_asset = new EventEmitter<any>();
   @Select(AssetState.getStates) assets$: Observable<Asset[]>;
+  @Select(AssetState.getCurrentItem) current_asset$: Observable<Asset>;
   constructor(private store: Store) { }
 
   ngOnInit() {
@@ -26,12 +27,11 @@ export class ReadAssetsComponent implements OnInit {
 
   onSelection(event){
     this.current_asset_name = event.option.value.AssetName;
-    
-    
   }
   
   getAsset(event) {
-    this.current_asset = event;
-    this.selected_current_asset.emit(event);
+    this.store.dispatch(new SelectAssetAction(event));
+    // this.current_asset = event;
+    // this.selected_current_asset.emit(event);
   }
 }

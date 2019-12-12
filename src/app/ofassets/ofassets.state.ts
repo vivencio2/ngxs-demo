@@ -1,17 +1,19 @@
 import { State, Action, Selector, StateContext } from '@ngxs/store';
 import { tap, map } from 'rxjs/operators';
-import { GetAssetsAction, AddAssetAction, UpdateAssetAction, DeleteAssetAction } from './ofassets.actions';
+import { GetAssetsAction, AddAssetAction, UpdateAssetAction, DeleteAssetAction, SelectAssetAction } from './ofassets.actions';
 import { Asset } from '../asset';
 import { OfassetsService } from './ofassets.service';
 
 export interface AssetListStateModel {
   items: Asset[];
+  currentItem: Asset;
 }
 
 @State<AssetListStateModel>({
   name: 'assets',
   defaults: {
-    items: []
+    items: [],
+    currentItem: null,
   }
 })
 export class AssetState {
@@ -20,6 +22,11 @@ export class AssetState {
   @Selector()
   static getStates(state: AssetListStateModel) {
     return state.items;
+  }
+
+  @Selector()
+  static getCurrentItem(state: AssetListStateModel) {
+    return state.currentItem;
   }
 
   @Action(GetAssetsAction)
@@ -76,5 +83,16 @@ export class AssetState {
       ...state,
       items: filtered,
   })
+  }
+
+  @Action(SelectAssetAction)
+  selectAsset({getState, setState}: StateContext<AssetListStateModel>, {payload}){
+    const state = getState();
+    const assets = state.items;
+    setState({
+      ...state,
+      items: assets,
+      currentItem: payload
+    })
   }
 }

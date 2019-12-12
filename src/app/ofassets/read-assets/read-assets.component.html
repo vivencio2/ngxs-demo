@@ -1,6 +1,6 @@
 <section>
   <h3>Asset List</h3>
-  <mat-selection-list #assetlist (selectionChange)="onSelection($event)">
+  <mat-selection-list #assetlist>
     <mat-list-option *ngFor="let asset of assets$ | async" [value]='asset' (click)="getAsset(asset)">
         <h3 matLine> {{asset.AssetName}} </h3>
         <p matLine>
@@ -13,7 +13,7 @@
     # of selected Assets: {{assetlist.selectedOptions.selected.length}}
   </p>
   <p>
-    Current selected Asset: {{ current_asset_name }}
+    Current selected Asset: {{ (current_asset$ | async)?.AssetName }}
   </p>      
   <p>All selected Assets:</p>
   <ul>
