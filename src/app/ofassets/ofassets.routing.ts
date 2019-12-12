@@ -1,6 +1,6 @@
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { AssetsComponent } from './assets/assets.component';
+import { AssetsComponent } from './overview-assets/assets.component';
 
 const OfassetRoutes: Routes = [
     {
