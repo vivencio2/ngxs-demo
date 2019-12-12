@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { OfassetsService } from '../ofassets.service';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'read-assets',
@@ -7,21 +8,24 @@ import { OfassetsService } from '../ofassets.service';
   styleUrls: ['./read-assets.component.scss']
 })
 export class ReadAssetsComponent implements OnInit {
-  assets: string[] = ['WTG1', 'WTG2', 'WTG3', 'WTG4', 'WTG5'];
-  current_asset: string;
-  assets1: Array<any>;
+  current_asset_name: string;
+  current_asset: any;
+  @Output() selected_current_asset = new EventEmitter<any>();
+  assets: any[];
   
   constructor(private assetService: OfassetsService) { }
 
   ngOnInit() {
-    this.assetService.getAssets().subscribe(result => this.assets1 = result);
+    this.assetService.getAssets().subscribe(result => this.assets = result);
   }
 
-  onSelection(e, v){
-    this.current_asset = e.option.value;
+  onSelection(event){
+    this.current_asset_name = event.option.value.AssetName;
+    
   }
   
   getAsset(event) {
-    console.log(event.target.parentNode.innerText);
+    this.current_asset = event;
+    this.selected_current_asset.emit(event);
   }
 }

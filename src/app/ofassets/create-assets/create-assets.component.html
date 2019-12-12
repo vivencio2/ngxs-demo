@@ -1,24 +1,24 @@
 <section>
   <h3>Create Asset</h3>
-  <form class="example-form">
+  <form class="example-form" [formGroup]="assetForm">
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Asset Name">
+        <input matInput placeholder="Asset Name" formControlName="assetName" required>
       </mat-form-field>
     
       <mat-form-field class="example-full-width">
-          <input matInput placeholder="Asset Description">
+          <input matInput placeholder="Asset Description" formControlName="assetDesc" required>
       </mat-form-field>
       <mat-form-field class="example-full-width">
         <mat-label>Asset Location</mat-label>
-          <select matNativeControl required>
+          <select matNativeControl formControlName="assetLoc" id="assetLoc" required>
               <option value="">Choose Asset Location</option>              
               <option value="Denmark">Denmark</option>
               <option value="Taiwan">Taiwan</option>
               <option value="United Kingdom">United Kingdom</option>
               <option value="United States">United States</option>
             </select>
-      </mat-form-field>
-      
+      </mat-form-field>      
     </form>
-  <button mat-raised-button>Add Assets</button>
+  <button mat-raised-button color="primary" (click)="createAsset()">Add Asset</button>
+  <button mat-raised-button button-space  (click)="clearAsset()">Cancel</button>
 </section>

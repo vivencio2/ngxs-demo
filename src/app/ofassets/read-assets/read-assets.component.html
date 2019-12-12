@@ -1,20 +1,24 @@
 <section>
   <h3>Asset List</h3>
-  <mat-selection-list #assetlist (selectionChange)="onSelection($event, assetlist.selectedOptions)">
-    <mat-list-option *ngFor="let asset of assets1" [value]='asset.AssetName' (click)="getAsset($event)">
-      {{asset.AssetName}}
+  <mat-selection-list #assetlist (selectionChange)="onSelection($event)">
+    <mat-list-option *ngFor="let asset of assets" [value]='asset' (click)="getAsset(asset)">
+        <h3 matLine> {{asset.AssetName}} </h3>
+        <p matLine>
+            <span> {{asset.AssetDesc}} </span>
+            <span class="demo-2"> -- {{asset.Location}} </span>
+          </p>
     </mat-list-option>
   </mat-selection-list>  
   <p>
     # of selected Assets: {{assetlist.selectedOptions.selected.length}}
   </p>
   <p>
-    Current selected Asset: {{ current_asset }}
+    Current selected Asset: {{ current_asset_name }}
   </p>      
   <p>All selected Assets:</p>
   <ul>
-        <li *ngFor="let i of assetlist.selectedOptions.selected">
-          {{ i.value }}
+        <li *ngFor="let selected of assetlist.selectedOptions.selected">
+          {{ selected.value.AssetName }}
         </li>
   </ul>
 </section>

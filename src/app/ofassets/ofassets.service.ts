@@ -24,7 +24,11 @@ export class OfassetsService {
   }
 
   updateAsset(key, value) {
-    return this.api.collection('assets').doc(key).set(value);
+    return this.api.collection('assets').doc(key).set({
+      AssetName: value.assetName,
+      AssetDesc: value.assetDesc,
+      Location: value.assetLoc
+    });
   }
 
   deleteAsset(key) {
@@ -33,9 +37,9 @@ export class OfassetsService {
 
   createAsset(value) {
     return this.api.collection('assets').add({
-      AssetName: value.AssetName,
-      AssetDesc: value.AssetDescription,
-      Location: value.AssetLocation
+      AssetName: value.assetName,
+      AssetDesc: value.assetDesc,
+      Location: value.assetLoc
     });
   }
 }

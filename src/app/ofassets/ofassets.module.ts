@@ -8,15 +8,19 @@ import {MatListModule} from '@angular/material/list';
 import {MatSelectModule} from '@angular/material/select';
 import { CreateAssetsComponent } from './create-assets/create-assets.component';
 import { ReadAssetsComponent } from './read-assets/read-assets.component';
+import { EditAssetsComponent } from './edit-assets/edit-assets.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 @NgModule({
-  declarations: [AssetsComponent, CreateAssetsComponent, ReadAssetsComponent],
+  declarations: [AssetsComponent, CreateAssetsComponent, ReadAssetsComponent, EditAssetsComponent],
   imports: [
     CommonModule,
     OfassetRoutesModule,
     MatButtonModule,
     MatListModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class OfassetsModule { }

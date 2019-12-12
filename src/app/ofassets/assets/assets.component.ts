@@ -6,9 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./assets.component.scss']
 })
 export class AssetsComponent implements OnInit {
-
+  selected_asset: any;
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit() {    
   }
 }

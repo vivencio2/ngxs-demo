@@ -1,4 +1,5 @@
 <section>  
-  <read-assets></read-assets>
+  <read-assets (selected_current_asset)="selected_asset = $event"></read-assets>
+  <edit-assets *ngIf="selected_asset !== undefined" [asset]="selected_asset"></edit-assets>
   <create-assets></create-assets>  
 </section>
