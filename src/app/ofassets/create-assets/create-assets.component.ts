@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { OfassetsService } from '../ofassets.service';
 import { Store } from '@ngxs/store';
@@ -8,7 +8,8 @@ import { Asset } from 'src/app/asset';
 @Component({
   selector: 'create-assets',
   templateUrl: './create-assets.component.html',
-  styleUrls: ['./create-assets.component.scss']
+  styleUrls: ['./create-assets.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreateAssetsComponent implements OnInit {
   assetForm: FormGroup;

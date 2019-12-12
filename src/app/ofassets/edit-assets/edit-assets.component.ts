@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { OfassetsService } from '../ofassets.service';
 import { Store, Select } from '@ngxs/store';
@@ -10,7 +10,8 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'edit-assets',
   templateUrl: './edit-assets.component.html',
-  styleUrls: ['./edit-assets.component.scss']
+  styleUrls: ['./edit-assets.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EditAssetsComponent implements OnInit {
 

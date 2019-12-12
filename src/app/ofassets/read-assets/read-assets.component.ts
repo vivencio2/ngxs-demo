@@ -13,8 +13,8 @@ import { GetAssetsAction, SelectAssetAction } from '../ofassets.actions';
   styleUrls: ['./read-assets.component.scss']
 })
 export class ReadAssetsComponent implements OnInit {
-  current_asset_name: string;
-  current_asset: any;
+  // current_asset_name: string;
+  // current_asset: any;
   // @Output() selected_current_asset = new EventEmitter<any>();
   @Select(AssetState.getStates) assets$: Observable<Asset[]>;
   @Select(AssetState.getCurrentItem) current_asset$: Observable<Asset>;
@@ -25,9 +25,9 @@ export class ReadAssetsComponent implements OnInit {
     this.store.dispatch(new GetAssetsAction());
   }
 
-  onSelection(event){
-    this.current_asset_name = event.option.value.AssetName;
-  }
+  // onSelection(event){
+  //   this.current_asset_name = event.option.value.AssetName;
+  // }
   
   getAsset(event) {
     this.store.dispatch(new SelectAssetAction(event));
