@@ -8,6 +8,9 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { OfassetsModule } from './ofassets/ofassets.module';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
+import { NgxsModule } from '@ngxs/store';
 
 
 @NgModule({
@@ -20,7 +23,10 @@ import { OfassetsModule } from './ofassets/ofassets.module';
     OfassetsModule,
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    NgxsModule.forRoot(),
+    NgxsReduxDevtoolsPluginModule.forRoot(),   
+    NgxsLoggerPluginModule.forRoot() 
   ],
   providers: [],
   bootstrap: [AppComponent]

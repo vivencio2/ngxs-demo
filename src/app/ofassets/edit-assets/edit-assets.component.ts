@@ -1,6 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { OfassetsService } from '../ofassets.service';
+import { Store } from '@ngxs/store';
+import { UpdateAssetAction, DeleteAssetAction } from '../ofassets.actions';
+import { Asset } from 'src/app/asset';
 
 @Component({
   selector: 'edit-assets',
@@ -11,7 +14,7 @@ export class EditAssetsComponent implements OnInit {
 
   @Input() asset: any;
   assetForm: FormGroup;
-  constructor(private formBuilder: FormBuilder, private assetService: OfassetsService) {
+  constructor(private formBuilder: FormBuilder, private assetService: OfassetsService, private store: Store) {
     this.setFormDefault();
    }
 
@@ -25,7 +28,7 @@ export class EditAssetsComponent implements OnInit {
 
   setFormDefault() {
     this.assetForm = new FormGroup({
-      assetName: new FormControl(''),
+      assetName: new FormControl({value: '', disabled: true}),
       assetDesc: new FormControl(''),
       assetLoc: new FormControl('')
     });
@@ -45,22 +48,37 @@ export class EditAssetsComponent implements OnInit {
 
   updateAsset() {    
     if(this.assetForm.valid && this.asset !== undefined) {      
-      this.assetService.updateAsset(this.asset.AssetId, this.assetForm.value);
+      //this.assetService.updateAsset(this.asset.AssetId, this.assetForm.value);      
+      const payload = new Asset(this.assetForm.value.assetName, this.assetForm.value.assetDesc, this.assetForm.value.assetLoc);
+      this.store.dispatch(new UpdateAssetAction(payload));
     } else {
       console.log('Asset information required!');
     }
   }
 
   deleteAsset() {
-    if(this.asset.AssetId !== undefined) {
-      if(window.confirm('Are you sure you want to delete ' + this.asset.AssetName + ' ?')) {        
-        this.assetService.deleteAsset(this.asset.AssetId);
-        this.asset = undefined;
-        this.setFormDefault();
-      } else {
-        console.log('Delete is cancelled!');
-      }
-      
+    if(window.confirm('Are you sure you want to delete ' + this.asset.AssetName + ' ?')) {        
+      //this.assetService.deleteAsset(this.asset.AssetId);
+      const payload = new Asset(this.assetForm.value.assetName, this.assetForm.value.assetDesc, this.assetForm.value.assetLoc);
+      this.store.dispatch(new DeleteAssetAction(payload));
+      this.asset = undefined;
+      this.setFormDefault();
+    } else {
+      console.log('Delete is cancelled!');
     }
+
+    
+    // if(this.asset.AssetId !== undefined) {
+    //   if(window.confirm('Are you sure you want to delete ' + this.asset.AssetName + ' ?')) {        
+    //     //this.assetService.deleteAsset(this.asset.AssetId);
+    //     const payload = new Asset(this.assetForm.value.assetName, this.assetForm.value.assetDesc, this.assetForm.value.assetLoc);
+    //     this.store.dispatch(new DeleteAssetAction(payload));
+    //     this.asset = undefined;
+    //     this.setFormDefault();
+    //   } else {
+    //     console.log('Delete is cancelled!');
+    //   }
+      
+    // }
   }
 }

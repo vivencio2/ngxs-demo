@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators'
+import { Asset } from '../asset';
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +12,10 @@ export class OfassetsService {
   constructor(private api: AngularFirestore) { }
 
   getAssets() {
-    return this.api.collection('assets')
+    return this.api.collection<Asset>('assets')
     .snapshotChanges().pipe(
-      map(changes =>
-        changes.map(c => ({ AssetId: c.payload.doc.id, ...c.payload.doc.data() }))
+      map(changes =>       
+        changes.map(c => ({ AssetId: c.payload.doc.id, ...c.payload.doc.data() as Asset }))
       ));
   }
 

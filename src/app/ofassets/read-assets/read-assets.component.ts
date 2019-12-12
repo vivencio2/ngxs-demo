@@ -1,6 +1,11 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { OfassetsService } from '../ofassets.service';
 import { EventEmitter } from '@angular/core';
+import { Select, Store } from '@ngxs/store';
+import { AssetState } from '../ofassets.state';
+import { Asset } from 'src/app/asset';
+import { Observable } from 'rxjs';
+import { GetAssetsAction } from '../ofassets.actions';
 
 @Component({
   selector: 'read-assets',
@@ -11,16 +16,17 @@ export class ReadAssetsComponent implements OnInit {
   current_asset_name: string;
   current_asset: any;
   @Output() selected_current_asset = new EventEmitter<any>();
-  assets: any[];
-  
-  constructor(private assetService: OfassetsService) { }
+  @Select(AssetState.getStates) assets$: Observable<Asset[]>;
+  constructor(private store: Store) { }
 
   ngOnInit() {
-    this.assetService.getAssets().subscribe(result => this.assets = result);
+    //this.assetService.getAssets().subscribe(result => this.assets = result);
+    this.store.dispatch(new GetAssetsAction());
   }
 
   onSelection(event){
     this.current_asset_name = event.option.value.AssetName;
+    
     
   }
   

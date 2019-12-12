@@ -1,6 +1,12 @@
 export class Asset {
-    Id: string;
+    AssetId: string;
     AssetName: string;
-    AssetDescription: string;
-    AsssetLocation: string;  
+    AssetDesc: string;
+    Location: string; 
+
+    constructor(name: string, desc: string, location: string) {
+      this.AssetName = name,
+      this.AssetDesc = desc;
+      this.Location = location;
+    }
   }

@@ -1,7 +1,7 @@
 <section>
   <h3>Asset List</h3>
   <mat-selection-list #assetlist (selectionChange)="onSelection($event)">
-    <mat-list-option *ngFor="let asset of assets" [value]='asset' (click)="getAsset(asset)">
+    <mat-list-option *ngFor="let asset of assets$ | async" [value]='asset' (click)="getAsset(asset)">
         <h3 matLine> {{asset.AssetName}} </h3>
         <p matLine>
             <span> {{asset.AssetDesc}} </span>

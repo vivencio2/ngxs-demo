@@ -10,6 +10,10 @@ import { CreateAssetsComponent } from './create-assets/create-assets.component';
 import { ReadAssetsComponent } from './read-assets/read-assets.component';
 import { EditAssetsComponent } from './edit-assets/edit-assets.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import {NgxsModule} from '@ngxs/store'
+import { AssetState } from './ofassets.state';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+import {NgxsLoggerPluginModule} from '@ngxs/logger-plugin';
 @NgModule({
   declarations: [AssetsComponent, CreateAssetsComponent, ReadAssetsComponent, EditAssetsComponent],
   imports: [
@@ -20,7 +24,10 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     MatInputModule,
     MatSelectModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NgxsModule.forFeature([AssetState]),
+    NgxsReduxDevtoolsPluginModule.forRoot(),   
+    NgxsLoggerPluginModule.forRoot() 
   ]
 })
 export class OfassetsModule { }
