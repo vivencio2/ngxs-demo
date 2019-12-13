@@ -5,14 +5,14 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: "AIzaSyAESyX2w3zavYv0UlYE5UyK8RWo4Ap6jYc",
-    authDomain: "assetapi.firebaseapp.com",
-    databaseURL: "https://assetapi.firebaseio.com",
+    apiKey: "",
+    authDomain: "",
+    databaseURL: "",
     projectId: "assetapi",
-    storageBucket: "assetapi.appspot.com",
-    messagingSenderId: "292115403380",
-    appId: "1:292115403380:web:62a4ce84f0e28078dab721",
-    measurementId: "G-KFCTJ3E1XD"
+    storageBucket: "",
+    messagingSenderId: "",
+    appId: "",
+    measurementId: ""
   }
 };
 
